@@ -1,0 +1,62 @@
+{% load static %}
+{% extends 'base.html' %}
+{% block title %}
+    <title>TMS | Tourism Management System</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="privacy">
+            <h3>My Tour History</h3>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form method="post">
+                <table border="1" width="100%" class="table">
+                    <tr align="center">
+                        <th>#</th>
+                        <th>Booking Id</th>
+                        <th>Package Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Comment</th>
+                        <th>Status</th>
+                        <th>Booking Date</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for booking in bookings %}
+                        <tr align="center">
+                            <td>{{ forloop.counter }}</td>
+                            <td>#BK{{ booking.id }}</td>
+                            <td><a href="{% url 'package_details' booking.package.id %}">{{ booking.package.package_name }}</a></td>
+                            <td>{{ booking.from_date }}</td>
+                            <td>{{ booking.to_date }}</td>
+                            <td>{{ booking.comment }}</td>
+                            <td>
+                                {% if booking.status == 0 %}
+                                    Pending
+                                {% elif booking.status == 1 %}
+                                    Confirmed
+                                {% elif booking.status == 2 and booking.cancelled_by == 'u' %}
+                                    Canceled by you at {{ booking.updation_date }}
+                                {% elif booking.status == 2 and booking.cancelled_by == 'a' %}
+                                    Canceled by admin at {{ booking.updation_date }}
+                                {% endif %}
+                            </td>
+                            <td>{{ booking.reg_date }}</td>
+                            {% if booking.status != 2 %}
+                                <td><button type="submit" name="bkid" value="{{ booking.id }}" onclick="return confirm('Do you really want to cancel booking')">Cancel</button></td>
+                            {% else %}
+                                <td>Cancelled</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        </div>
+    </div>
+{% endblock %}

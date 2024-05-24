@@ -1,0 +1,23 @@
+{% load static %}
+{% extends 'base.html' %}
+{% block title %}
+    <title>My Profile</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3>My Profile</h3>
+        <form method="post">
+            {% csrf_token %}
+            {% if msg %}
+            <div class="succWrap">{{ msg }}</div>
+            {% endif %}
+            <p><b>Name:</b> <input type="text" name="name" value="{{ user.full_name }}" required></p>
+            <p><b>Mobile Number:</b> <input type="text" name="mobileno" value="{{ user.mobile_number }}" maxlength="10" required></p>
+            <p><b>Email:</b> {{ user.email }}</p>
+            <p><b>Last Updation Date:</b> {{ user.last_updated }}</p>
+            <p><b>Registration Date:</b> {{ user.registration_date }}</p>
+            <button type="submit" name="submit6">Update</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'adminuser/base.html' %}
+{% block content %}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-block">
+            <h4 class="sub-title">Update Package Details</h4>
+            <form method="POST" action="{% url 'update_package_details' %}" enctype="multipart/form-data">
+                {% include 'adminuser/messages.html' %}
+                {% csrf_token %}
+                <input type="hidden" name="package_id" value="{{ package.id }}">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Package Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name" required="True" value="{{ package.name }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Location</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="location" required="True" value="{{ package.location }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Duration</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="duration" required="True" value="{{ package.duration }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Price (USD)</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="price" required="True" value="{{ package.price }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Max Persons</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="max_persons" required="True" value="{{ package.max_persons }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="description" rows="4" required="True">{{ package.description }}</textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Rating</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="rating" required="True" value="{{ package.rating }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Image</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" name="image">
+                        {% if package.image %}
+                            <img src="{{ package.image.url }}" alt="Package Image" style="max-width: 100px; max-height: 100px;">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Animation Delay</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="delay" required="True" value="{{ package.delay }}">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-user btn-block">Update Package</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

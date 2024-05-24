@@ -1,0 +1,74 @@
+{% extends 'adminuser/base.html' %}
+{% block content %}
+
+{% block content %}
+    <div class="page-container">
+        {% include 'header.html' %}
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a><i class="fa fa-angle-right"></i>Manage Bookings</li>
+        </ol>
+
+        {% if error %}
+            <div class="errorWrap"><strong>ERROR</strong>: {{ error }} </div>
+        {% elif msg %}
+            <div class="succWrap"><strong>SUCCESS</strong>: {{ msg }} </div>
+        {% endif %}
+
+        <div class="agile-grids"> 
+            <div class="agile-tables">
+                <div class="w3l-table-info">
+                    <h2>Manage {{ uname }}'s Bookings</h2>
+                    <table id="table">
+                        <thead>
+                            <tr>
+                                <th>Booking id</th>
+                                <th>Name</th>
+                                <th>Mobile No.</th>
+                                <th>Email Id</th>
+                                <th>RegDate </th>
+                                <th>From /To </th>
+                                <th>Comment </th>
+                                <th>Status </th>
+                                <th>Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in results %}
+                                <tr>
+                                    <td>#BK-{{ result.bookid }}</td>
+                                    <td>{{ result.fname }}</td>
+                                    <td>{{ result.mnumber }}</td>
+                                    <td>{{ result.email }}</td>
+                                    <td>{{ result.fdate }} To {{ result.tdate }}</td>
+                                    <td>{{ result.comment }}</td>
+                                    <td>
+                                        {% if result.status == 0 %}
+                                            Pending
+                                        {% elif result.status == 1 %}
+                                            Confirmed
+                                        {% elif result.status == 2 and result.cancelby == 'a' %}
+                                            Canceled by you at {{ result.upddate }}
+                                        {% elif result.status == 2 and result.cancelby == 'u' %}
+                                            Canceled by User at {{ result.upddate }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if result.status == 2 %}
+                                            Canceled
+                                        {% elif result.status == 1 %}
+                                            Confirmed
+                                        {% else %}
+                                            <a href="{% url 'cancel_booking' result.bookid %}" onclick="return confirm('Do you really want to cancel booking')">Cancel</a> / 
+                                            <a href="{% url 'confirm_booking' result.bookid %}" onclick="return confirm('booking has been confirm')">Confirm</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

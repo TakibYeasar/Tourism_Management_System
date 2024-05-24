@@ -1,0 +1,42 @@
+{% extends 'adminuser/base.html' %}
+
+{% block content %}
+<div class="page-container">
+    <div class="left-content">
+        <div class="mother-grid-inner">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a><i class="fa fa-angle-right"></i>Create Package</li>
+            </ol>
+            <div class="grid-form">
+                <div class="grid-form1">
+                    <h3>Create Package</h3>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="{{ message.tags }}Wrap">
+                                <strong>{{ message.tags|upper }}</strong>: {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form class="form-horizontal" name="package" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}" class="col-sm-2 control-label">{{ field.label }}</label>
+                                <div class="col-sm-8">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <button type="submit" name="submit" class="btn-primary btn">Create</button>
+                                <button type="reset" class="btn-inverse btn">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

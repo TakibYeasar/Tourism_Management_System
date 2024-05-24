@@ -1,0 +1,77 @@
+{% extends 'adminuser/base.html' %}
+{% block content %}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>Manage Packages</h5>
+           
+            <div class="card-header-right">
+                <ul class="list-unstyled card-option">
+                    <li><i class="fa fa-chevron-left"></i></li>
+                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                    <li><i class="fa fa-minus minimize-card"></i></li>
+                    <li><i class="fa fa-refresh reload-card"></i></li>
+                    <li><i class="fa fa-times close-card"></i></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                {% include 'adminuser/messages.html' %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>Package Name</th>
+                            <th>Location</th>
+                            <th>Duration</th>
+                            <th>Price (USD)</th>
+                            <th>Max Persons</th>
+                            <th>Description</th>
+                            <th>Rating</th>
+                            <th>Image</th>
+                            <th>Creation Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for package in packages %}
+                        <tr>
+                            <th scope="row">{{ package.id }}</th>
+                            <td>{{ package.name }}</td>
+                            <td>{{ package.location }}</td>
+                            <td>{{ package.duration }}</td>
+                            <td>{{ package.price }}</td>
+                            <td>{{ package.max_persons }}</td>
+                            <td>{{ package.description }}</td>
+                            <td>{{ package.rating }}</td>
+                            <td><img src="{{ package.image.url }}" alt="{{ package.name }}" style="max-width: 100px; max-height: 100px;"></td>
+                            <td>{{ package.created_at }}</td>
+                            <td><a href="{% url 'update_package' package.id %}" class="btn btn-success">Update</a>&nbsp;<a href="{% url 'delete_package' package.id %}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if packages.has_previous %}
+                            <a href="?page=1">&laquo;<strong style="color: blue;"> First |</strong></a>
+                            <a href="?page={{ packages.previous_page_number }}"><strong style="color: blue;">Previous |</strong></a>
+                        {% endif %}
+                
+                        <span class="current-page">
+                            Page {{ packages.number }} of {{ packages.paginator.num_pages }}.
+                        </span>
+                
+                        {% if packages.has_next %}
+                            <a href="?page={{ packages.next_page_number }}"><strong style="color: blue;">Next |</strong></a>
+                            <a href="?page={{ packages.paginator.num_pages }}"><strong style="color: blue;">Last &raquo;</strong></a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

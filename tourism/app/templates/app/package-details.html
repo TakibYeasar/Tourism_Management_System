@@ -1,0 +1,30 @@
+{% load static %}
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ package.name }} Details</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ package.name }} Details</h1>
+        <img src="{{ package.image.url }}" alt="{{ package.name }}">
+        <p><strong>Location:</strong> {{ package.location }}</p>
+        <p><strong>Duration:</strong> {{ package.duration }}</p>
+        <p><strong>Max Persons:</strong> {{ package.max_persons }}</p>
+        <p><strong>Price:</strong> USD {{ package.price }}</p>
+        <p><strong>Rating:</strong>
+            {% for i in 0|range:5 %}
+                <small class="fa fa-star text-primary{% if package.rating < i+1 %} text-muted{% endif %}"></small>
+            {% endfor %}
+        </p>
+        <p><strong>Description:</strong> {{ package.description }}</p>
+
+        <h1 class="text-white mb-4">Book A Tour</h1>
+        <form method="post" action="{% url 'book_package' package.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
+        </form>
+    </div>
+{% endblock %}

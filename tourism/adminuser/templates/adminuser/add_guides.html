@@ -1,0 +1,53 @@
+{% extends 'adminuser/base.html' %}
+{% block content %}
+<div class="col-sm-12">
+<div class="card">
+    
+        <div class="card-block">
+            <h4 class="sub-title">Add Guides </h4>
+            <form  method="POST" action="" enctype="multipart/form-data">
+                {% include 'adminuser/messages.html' %}
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Full Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"  name="full_name" required="True">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Designation</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="designation" value="" class="form-control" required='true'>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Profile Pic</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control"  name="image" required="True">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Facebook Link</label>
+                    <div class="col-sm-10">
+                        <input type="url" name="facebook_link" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Twitter Link</label>
+                    <div class="col-sm-10">
+                        <input type="url" name="twitter_link" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Instagram Link</label>
+                    <div class="col-sm-10">
+                        <input type="url" name="instagram_link" value="" class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-user btn-block">Add Guides</button>    
+            </form>
+        </div>  
+    </div>
+</div>              
+
+{% endblock %}

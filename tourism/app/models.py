@@ -11,7 +11,7 @@ class TourPackage(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     max_persons = models.IntegerField()
     description = models.TextField()
-    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    rating = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
     image = models.ImageField(upload_to='packageimages/')
     # Animation delay for frontend
     delay = models.DecimalField(max_digits=3, decimal_places=1, default=0.1)

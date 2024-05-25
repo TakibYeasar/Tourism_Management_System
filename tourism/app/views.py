@@ -57,7 +57,7 @@ def ProfileView(request):
 
 def AllPackagesView(request):
     packages = TourPackage.objects.all()[:4]
-    return render(request, 'package_list.html', {'packages': packages})
+    return render(request, 'app/packages.html', {'packages': packages})
 
 
 def PackageDetailsView(request, pkg_id):

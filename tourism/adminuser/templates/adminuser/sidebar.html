@@ -6,7 +6,7 @@
         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation" style="padding-left: 10px;padding-top: 10;">Layout</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="active">
-                <a href="">
+                <a href="{% url 'home' %}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                     <span class="pcoded-mcaret"></span>
@@ -20,14 +20,14 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class=" ">
-                        <a href="">
+                        <a href="{% url 'add_package' %}">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Packages</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="">
+                        <a href="{% url 'manage_package' %}">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Manage Packages</span>
                             <span class="pcoded-mcaret"></span>
@@ -44,14 +44,14 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class=" ">
-                        <a href="">
+                        <a href="{% url 'add_guide' %}">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Guides</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="">
+                        <a href="{% url 'manage_guide' %}">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Manage Guides</span>
                             <span class="pcoded-mcaret"></span>

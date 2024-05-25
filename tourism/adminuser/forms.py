@@ -26,7 +26,7 @@ class PackageCreationForm(forms.ModelForm):
     class Meta:
         model = TourPackage
         fields = ['name', 'location', 'duration', 'price',
-                  'max_persons', 'description', 'rating', 'image', 'delay']
+                  'max_persons', 'description', 'image']
         labels = {
             'name': 'Package Name',
             'location': 'Location',
@@ -34,9 +34,7 @@ class PackageCreationForm(forms.ModelForm):
             'price': 'Price (USD)',
             'max_persons': 'Maximum Persons',
             'description': 'Description',
-            'rating': 'Rating',
             'image': 'Image',
-            'delay': 'Animation Delay'
         }
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),

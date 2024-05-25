@@ -48,7 +48,8 @@
                             <td>{{ package.rating }}</td>
                             <td><img src="{{ package.image.url }}" alt="{{ package.name }}" style="max-width: 100px; max-height: 100px;"></td>
                             <td>{{ package.created_at }}</td>
-                            <td><a href="{% url 'update_package' package.id %}" class="btn btn-success">Update</a>&nbsp;<a href="{% url 'delete_package' package.id %}" class="btn btn-danger">Delete</a></td>
+                            <td><a href="{% url 'update_package' package.id %}" class="btn btn-success">Update</a>&nbsp;</td>
+                            {% comment %} <td><a href="{% url 'update_package' package.id %}" class="btn btn-success">Update</a>&nbsp;<a href="{% url 'delete_package' package.id %}" class="btn btn-danger">Delete</a></td> {% endcomment %}
                         </tr>
                         {% endfor %}
                     </tbody>

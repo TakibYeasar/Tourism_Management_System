@@ -80,17 +80,17 @@ def AddPackageView(request):
         form = PackageCreationForm(request.POST, request.FILES)
         if form.is_valid():
             package = TourPackage(
-                package_name=form.cleaned_data['package_name'],
-                package_type=form.cleaned_data['package_type'],
-                package_location=form.cleaned_data['package_location'],
-                package_price=form.cleaned_data['package_price'],
-                package_features=form.cleaned_data['package_features'],
-                package_details=form.cleaned_data['package_details'],
-                package_image=form.cleaned_data['package_image']
+                name=form.cleaned_data['name'],
+                location=form.cleaned_data['location'],
+                duration=form.cleaned_data['duration'],
+                price=form.cleaned_data['price'],
+                max_persons=form.cleaned_data['max_persons'],
+                description=form.cleaned_data['description'],
+                image=form.cleaned_data['image']
             )
             package.save()
             messages.success(request, 'Package Created Successfully')
-            return redirect('dashboard')
+            return redirect('home')
         else:
             messages.error(request, 'Something went wrong. Please try again')
     else:
@@ -137,13 +137,13 @@ def AddGuideView(request):
         form = PackageCreationForm(request.POST, request.FILES)
         if form.is_valid():
             package = TourPackage(
-                package_name=form.cleaned_data['package_name'],
-                package_type=form.cleaned_data['package_type'],
-                package_location=form.cleaned_data['package_location'],
-                package_price=form.cleaned_data['package_price'],
-                package_features=form.cleaned_data['package_features'],
-                package_details=form.cleaned_data['package_details'],
-                package_image=form.cleaned_data['package_image']
+                name=form.cleaned_data['name'],
+                type=form.cleaned_data['type'],
+                location=form.cleaned_data['location'],
+                price=form.cleaned_data['price'],
+                features=form.cleaned_data['features'],
+                details=form.cleaned_data['details'],
+                image=form.cleaned_data['image']
             )
             package.save()
             messages.success(request, 'Package Created Successfully')

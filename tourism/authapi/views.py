@@ -18,7 +18,7 @@ def register(request):
             messages.error(request, 'Something went wrong. Please try again.')
     else:
         form = UserRegistrationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'authapi/signup.html', {'form': form})
 
 
 def user_login(request):
@@ -39,7 +39,7 @@ def user_login(request):
             messages.error(request, 'Please correct the errors in the form.')
     else:
         form = LoginForm()
-    return render(request, 'signin.html', {'form': form})
+    return render(request, 'authapi/signin.html', {'form': form})
 
 
 def logout_user(request):

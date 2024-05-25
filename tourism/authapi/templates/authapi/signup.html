@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account</title>
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -29,28 +22,10 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <p>By logging in you agree to our <a href="{% url 'terms' %}">Terms and Conditions</a> and <a href="{% url 'privacy' %}">Privacy Policy</a></p>
                         </div>
                     </div>
                 </section>
             </div>
         </div>
     </div>
-    <script>
-    function checkAvailability() {
-        $("#loaderIcon").show();
-        jQuery.ajax({
-            url: "{% url 'check_availability' %}",
-            data: { email: $("#email").val() },
-            type: "POST",
-            success: function(data) {
-                $("#user-availability-status").html(data);
-                $("#loaderIcon").hide();
-            },
-            error: function() {}
-        });
-    }
-    </script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-</body>
-</html>
+{% endblock %}

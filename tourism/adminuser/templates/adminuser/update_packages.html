@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-block">
             <h4 class="sub-title">Update Package Details</h4>
-            <form method="POST" action="{% url 'update_package_details' %}" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'update_package' pid=package.id %}" enctype="multipart/form-data">
                 {% include 'adminuser/messages.html' %}
                 {% csrf_token %}
                 <input type="hidden" name="package_id" value="{{ package.id }}">
@@ -45,12 +45,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Rating</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="rating" required="True" value="{{ package.rating }}">
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Image</label>
                     <div class="col-sm-10">
                         <input type="file" class="form-control" name="image">
@@ -59,12 +53,6 @@
                         {% else %}
                             <p>No image available</p>
                         {% endif %}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Animation Delay</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="delay" required="True" value="{{ package.delay }}">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">Update Package</button>

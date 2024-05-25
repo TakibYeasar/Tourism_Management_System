@@ -42,7 +42,7 @@
                             <td>{{ guide.facebook_link }}</td>
                             <td>{{ guide.twitter_link }}</td>
                             <td>{{ guide.instagram_link }}</td>
-                            <td><a href="{% url 'update_guide' guide.id %}" class="btn btn-success">Update</a>&nbsp;<a href="{% url 'delete_guide' guide.id %}" class="btn btn-danger">Delete</a></td>
+                            <td><a href="{% url 'update_guide' guide.id %}" class="btn btn-success">Update</a>&nbsp;<a href="{% url 'manage_guide' %}?action=delete&id={{ guide.id }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this guide?');">Delete</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

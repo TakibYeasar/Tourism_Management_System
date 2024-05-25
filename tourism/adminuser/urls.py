@@ -14,13 +14,13 @@ urlpatterns = [
     # Packages Path
     path('add-package', views.AddPackageView, name='add_package'),
     path('manage-package', views.ManagePackageView, name='manage_package'),
-    path('update-package/<str:id>',
+    path('update-package/<str:pid>',
          views.UpdatePackageView, name='update_package'),
     
     # Guides Path
     path('add-guide', views.AddGuideView, name='add_guide'),
     path('manage-guide', views.ManageGuideView, name='manage_guide'),
-    path('update-guide/<str:id>', views.UpdateGuideView, name='update_guide'),
+    path('update-guide/<str:gid>', views.UpdateGuideView, name='update_guide'),
 
     # Manage
     path('manage-users/', views.ManageUserView, name='manage_users'),

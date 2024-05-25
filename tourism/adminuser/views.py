@@ -13,6 +13,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 def DashboardView(request):
     user_count = User.objects.count()
     package_count = TourPackage.objects.count()
+    guide_count = Guide.objects.count()
     booking_count = Booking.objects.count()
     new_booking_count = Booking.objects.filter(status__isnull=True).count()
     cancelled_booking_count = Booking.objects.filter(status='2').count()
@@ -21,6 +22,7 @@ def DashboardView(request):
     context = {
         'user_count': user_count,
         'package_count': package_count,
+        'guide_count': guide_count,
         'booking_count': booking_count,
         'new_booking_count': new_booking_count,
         'cancelled_booking_count': cancelled_booking_count,
@@ -31,9 +33,9 @@ def DashboardView(request):
 
 
 @login_required
-def ProfileView(request):
+def ProfileView(request, admin_id):
     if 'alogin' not in request.session:
-        return redirect('index')
+        return redirect('home')
 
     admin_id = request.session['alogin']
     admin = CustomUser.objects.get(user_name=admin_id)
@@ -105,7 +107,7 @@ def ManagePackageView(request):
         pid = int(request.GET.get('id'))
         TourPackage.objects.filter(id=pid).delete()
         messages.success(request, "Package deleted.")
-        return redirect('manage_packages')
+        return redirect('manage_package')
 
     packages = TourPackage.objects.all()
     return render(request, 'adminuser/manage_packages.html', {'packages': packages})
@@ -113,45 +115,47 @@ def ManagePackageView(request):
 
 @login_required
 def UpdatePackageView(request, pid):
-    if 'alogin' not in request.session:
-        return redirect('index')
+    # if 'alogin' not in request.session:
+    #     return redirect('home')
 
     package = TourPackage.objects.get(pk=pid)
 
     if request.method == 'POST':
-        package.name = request.POST['packagename']
-        package.type = request.POST['packagetype']
-        package.location = request.POST['packagelocation']
-        package.price = request.POST['packageprice']
-        package.features = request.POST['packagefeatures']
-        package.details = request.POST['packagedetails']
+        package.name = request.POST['name']
+        package.location = request.POST['location']
+        package.duration = request.POST['duration']
+        package.price = request.POST['price']
+        package.max_persons = request.POST['max_persons']
+        package.description = request.POST['description']
+        if 'image' in request.FILES:
+            package.image = request.FILES['image']
         package.save()
         return redirect('update_package', pid=pid)
 
     return render(request, 'adminuser/update_packages.html', {'package': package})
 
 
+
 @login_required
 def AddGuideView(request):
     if request.method == 'POST':
-        form = PackageCreationForm(request.POST, request.FILES)
+        form = GuideCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            package = TourPackage(
-                name=form.cleaned_data['name'],
-                type=form.cleaned_data['type'],
-                location=form.cleaned_data['location'],
-                price=form.cleaned_data['price'],
-                features=form.cleaned_data['features'],
-                details=form.cleaned_data['details'],
-                image=form.cleaned_data['image']
+            guide= Guide(
+                full_name=form.cleaned_data['full_name'],
+                designation=form.cleaned_data['designation'],
+                image=form.cleaned_data['image'],
+                facebook_link=form.cleaned_data['facebook_link'],
+                twitter_link=form.cleaned_data['twitter_link'],
+                instagram_link=form.cleaned_data['instagram_link']
             )
-            package.save()
-            messages.success(request, 'Package Created Successfully')
-            return redirect('dashboard')
+            guide.save()
+            messages.success(request, 'Guide Created Successfully')
+            return redirect('home')
         else:
             messages.error(request, 'Something went wrong. Please try again')
     else:
-        form = PackageCreationForm()
+        form = GuideCreationForm()
 
     return render(request, 'adminuser/add_guides.html', {'form': form})
 
@@ -159,33 +163,34 @@ def AddGuideView(request):
 @login_required
 def ManageGuideView(request):
     if 'action' in request.GET and request.GET.get('action') == 'delete':
-        pid = int(request.GET.get('id'))
-        TourPackage.objects.filter(id=pid).delete()
-        messages.success(request, "Package deleted.")
+        gid = int(request.GET.get('id'))
+        Guide.objects.filter(id=gid).delete()
+        messages.success(request, "Guide deleted.")
         return redirect('manage_packages')
 
-    packages = TourPackage.objects.all()
-    return render(request, 'adminuser/manage_guides.html', {'packages': packages})
+    guides = Guide.objects.all()
+    return render(request, 'adminuser/manage_guides.html', {'guides': guides})
 
 
 @login_required
-def UpdateGuideView(request, pid):
+def UpdateGuideView(request, gid):
     if 'alogin' not in request.session:
-        return redirect('index')
+        return redirect('home')
 
-    package = TourPackage.objects.get(pk=pid)
+    guide = Guide.objects.get(pk=gid)
 
     if request.method == 'POST':
-        package.name = request.POST['packagename']
-        package.type = request.POST['packagetype']
-        package.location = request.POST['packagelocation']
-        package.price = request.POST['packageprice']
-        package.features = request.POST['packagefeatures']
-        package.details = request.POST['packagedetails']
-        package.save()
-        return redirect('update_package', pid=pid)
+        guide.full_name = request.POST['full_name']
+        guide.designation = request.POST['designation']
+        guide.facebook_link = request.POST['facebook_link']
+        guide.twitter_link = request.POST['twitter_link']
+        guide.instagram_link = request.POST['instagram_link']
+        if 'image' in request.FILES:
+            guide.image = request.FILES['image']
+        guide.save()
+        return redirect('update_guide', gid=gid)
 
-    return render(request, 'adminuser/update_Guides.html', {'package': package})
+    return render(request, 'adminuser/update_guides.html', {'guide': guide})
 
 
 

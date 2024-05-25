@@ -6,17 +6,6 @@
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="ti-menu"></i>
             </a>
-            <div class="mobile-search">
-                <div class="header-search">
-                    <div class="main-search morphsearch-search">
-                        <div class="input-group">
-                            <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                            <input type="text" class="form-control" placeholder="Enter Keyword">
-                            <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <a href="dashboard.html">
                 <strong style="font-size: 20px;">Tourist</strong>
             </a>
@@ -31,25 +20,20 @@
                     <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                 </li>
              
-                {% comment %} <li>
+                <li>
                     <h4 style="color: white;padding-top: 20px;">Welcome &nbsp;{{user.first_name}}&nbsp;{{user.last_name}}</h4>
-                </li> {% endcomment %}
+                </li>
             </ul>
             <ul class="nav-right">
              
                 
                 <li class="user-profile header-notification">
                     <a href="#!">
-                        <img src="{% static 'assets/images/avatar-4.jpg'%}" class="img-radius" alt="User-Profile-Image">
-                        {% comment %} <span>{{user.first_name}}&nbsp;{{user.last_name}}</span> {% endcomment %}
+                        <img src="{% static 'images/faq_man.png'%}" class="img-radius" alt="User-Profile-Image">
+                        <span>{{user.first_name}}&nbsp;{{user.last_name}}</span>
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
-                        <li>
-                            <a href="">
-                                <i class="ti-settings"></i> Settings
-                            </a>
-                        </li>
                         <li>
                             <a href="{% url 'profile' %}">
                                 <i class="ti-user"></i> Profile

@@ -1,5 +1,5 @@
 from django import forms
-from app.models import TourPackage, Guide
+from app.models import *
 
 
 class PasswordChangeForm(forms.Form):

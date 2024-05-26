@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegistrationForm, LoginForm
+from .forms import *
 from .models import CustomUser
 
 
@@ -32,7 +32,10 @@ def user_login(request):
                 request.session['user_id'] = user.id
                 messages.success(
                     request, 'You have been logged in successfully.')
-                return redirect('package_list')
+                if user.is_admin:
+                    return redirect('admin_dashboard')
+                else:
+                    return redirect('home')
             else:
                 messages.error(request, 'Invalid email or password')
         else:
@@ -49,11 +52,12 @@ def logout_user(request):
     return redirect('login')
 
 
-def check_availability(request):
-    email = request.GET.get('email', None)
-    data = {
-        'is_taken': CustomUser.objects.filter(email=email).exists()
-    }
-    if data['is_taken']:
-        data['error_message'] = 'A user with this email already exists.'
-    return render(data)
+def home(request):
+    return render(request, 'app/home.html')
+
+
+def user_profile(request):
+    return render(request, 'app/profile.html')
+
+def admin_dashboard(request):
+    return render(request, 'adminuser/dashboard.html')

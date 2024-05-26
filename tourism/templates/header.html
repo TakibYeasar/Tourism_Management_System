@@ -1,21 +1,29 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-secondary px-4 px-lg-5 py-3 py-lg-0">
-            <a href="#" class="navbar-brand p-0">
-                <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Tourist</h1>
-                <!-- <img src="img/logo.png" alt="Logo"> -->
-            </a>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="#" class="nav-item nav-link active">Home</a>
-                    <a href="#about" class="nav-item nav-link">About</a>
-                    <a href="#service" class="nav-item nav-link">Services</a>
-                    <a href="#package" class="nav-item nav-link">Packages</a>
-                    <a href="#booking" class="nav-item nav-link">Booking</a>
-                    <a href="#team" class="nav-item nav-link">Travel Guides</a>
-                    <a href="#contact" class="nav-item nav-link">Contact</a>
-                </div>
-                <a href="{% url 'login'  %}" class="nav-item nav-link">Login</a>
-                <a href="{% url 'register'  %}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
-            </div>
-        </nav>
+    <a href="#" class="navbar-brand p-0">
+        <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Tourist</h1>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+            <a href="#" class="nav-item nav-link active">Home</a>
+            <a href="#about" class="nav-item nav-link">About</a>
+            <a href="#service" class="nav-item nav-link">Services</a>
+            <a href="#package" class="nav-item nav-link">Packages</a>
+            <a href="#booking" class="nav-item nav-link">Booking</a>
+            <a href="#team" class="nav-item nav-link">Travel Guides</a>
+            <a href="#contact" class="nav-item nav-link">Contact</a>
+        </div>
+        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+            {% if user.is_admin %}
+                <a href="admin_dashboard" class="nav-item nav-link">Admin Dashboard</a>
+            {% else %}
+                {% comment %} <a href="{% url 'user_profile' %}" class="nav-item nav-link">Profile</a> {% endcomment %}
+            {% endif %}
+            {% comment %} <a href="{% url 'logout' %}" class="btn btn-primary rounded-pill py-2 px-4">Logout</a> {% endcomment %}
+        {% comment %} {% else %} {% endcomment %}
+            <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+        {% comment %} {% endif %} {% endcomment %}
+    </div>
+</nav>

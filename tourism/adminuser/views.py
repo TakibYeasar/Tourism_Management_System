@@ -197,7 +197,7 @@ def UpdateGuideView(request, gid):
 @login_required
 def ManageUserView(request):
     users = User.objects.all()
-    return render(request, 'manage_users.html', {'users': users})
+    return render(request, 'adminuser/manage_users.html', {'users': users})
 
 
 @login_required
@@ -222,7 +222,7 @@ def ManageBookingsView(request):
         msg = ""
 
     bookings = Booking.objects.select_related('user', 'package').all()
-    return render(request, 'manage_bookings.html', {'bookings': bookings, 'msg': msg})
+    return render(request, 'adminuser/manage_bookings.html', {'bookings': bookings, 'msg': msg})
 
 
 def UserBookingsView(request):
@@ -233,4 +233,5 @@ def UserBookingsView(request):
         context['uname'] = request.user.username  # Assuming user has username
     except Exception as e:
         context['error'] = str(e)
-    return render(request, 'manage_bookings.html', context)
+    return render(request, 'adminuser/manage_bookings.html', context)
+

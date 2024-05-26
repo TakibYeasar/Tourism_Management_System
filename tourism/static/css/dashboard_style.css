@@ -1,11 +1,33 @@
-/* Add your custom styles for the dashboard here */
-
 /* Body */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+}
+
+
+/* Header */
+.navbar-wrapper {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+.navbar-logo {
+    ul {
+        list-style: none;
+    }
+}
+
+.navbar-container {
+    ul {
+        list-style: none;
+    }
 }
 
 /* Theme Loader */
@@ -18,15 +40,8 @@ body {
     padding: 20px;
 }
 
-/* Header */
-.navbar-wrapper {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-}
-
 /* Sidebar */
-.pcoded-wrapper {
+/* .pcoded-wrapper {
     background-color: #444;
     color: #fff;
     width: 200px;
@@ -35,7 +50,7 @@ body {
     bottom: 0;
     left: 0;
     padding: 20px 0;
-}
+} */
 
 /* Main Content */
 .pcoded-main-container {
@@ -147,7 +162,8 @@ body {
 }
 
 .pcoded-hasmenu ul {
-    display: none;
+    /* display: none; */
+    list-style: none;
 }
 
 .pcoded-hasmenu.active ul {
@@ -277,6 +293,7 @@ input[type="file"] {
     background-color: #0056b3;
 }
 
+
 /* Form Styles */
 .page-container {
     padding: 20px;
@@ -349,6 +366,8 @@ h3 {
     opacity: 0.8;
 }
 
+
+
 /* Form Styles */
 .card {
     background-color: #fff;
@@ -390,6 +409,7 @@ h3 {
 .btn-primary:hover {
     opacity: 0.8;
 }
+
 
 /* Table Styles */
 .card {
@@ -461,6 +481,7 @@ h3 {
 .btn:hover {
     opacity: 0.8;
 }
+
 
 /* Common Styles */
 .card {

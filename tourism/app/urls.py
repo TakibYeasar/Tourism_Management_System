@@ -7,7 +7,8 @@ urlpatterns = [
     path('profile/', views.ProfileView, name='profile'),
     path('packages/', views.AllPackagesView, name='package_list'),
     path('package/<int:pkg_id>/', views.PackageDetailsView, name='package_details'),
+    path('guides/', views.AllGuidesView, name='guide_list'),
     path('package/<int:pkg_id>/book/', views.BookPackageView, name='book_package'),
-    path('confirmation/', views.ConfirmationView, name='confirmation'),
     path('tour-history/', views.TourHistoryView, name='tour_history'),
+    path('contact/', views.ContactView, name='contact'),
 ]

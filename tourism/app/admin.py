@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(TourPackage)
 admin.site.register(Booking)
 admin.site.register(Guide)
+admin.site.register(Contact)

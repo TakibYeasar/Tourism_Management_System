@@ -6,11 +6,10 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from authapi.models import CustomUser
-from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import TourPackage, Booking
-from .forms import BookingForm
+from .models import *
+from .forms import *
 
 
 def HomeView(request):
@@ -56,13 +55,18 @@ def ProfileView(request):
 
 
 def AllPackagesView(request):
-    packages = TourPackage.objects.all()[:4]
+    packages = TourPackage.objects.all()
     return render(request, 'app/packages.html', {'packages': packages})
 
 
 def PackageDetailsView(request, pkg_id):
     package = TourPackage.objects.get(pk=pkg_id)
     return render(request, 'package_details.html', {'package': package})
+
+
+def AllGuidesView(request):
+    guides = Guide.objects.all()
+    return render(request, 'app/guides.html', {'guides': guides})
 
 
 def BookPackageView(request, pkg_id):
@@ -77,18 +81,13 @@ def BookPackageView(request, pkg_id):
             return redirect('thank_you')  # or another success page
     else:
         form = BookingForm()
-    return render(request, 'package-details.html', {'package': package, 'form': form})
-    return redirect('index')  # Redirect to index page after booking
+    return render(request, 'adminuser/package-details.html', {'package': package, 'form': form})
 
-
-def ConfirmationView(request):
-    msg = request.session.get('msg', '')
-    return render(request, 'confirmation.html', {'msg': msg})
 
 
 def TourHistoryView(request):
     if not request.session.get('login'):
-        return redirect('index')
+        return redirect('home')
 
     if request.method == 'POST':
         bkid = request.POST.get('bkid')
@@ -110,6 +109,18 @@ def TourHistoryView(request):
 
     user_email = request.session.get('login')
     bookings = Booking.objects.filter(user_email=user_email)
-    return render(request, 'tour_history.html', {'bookings': bookings})
+    return render(request, 'app/tour_history.html', {'bookings': bookings})
 
+
+def ContactView(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Your message has been sent successfully!')
+            return redirect('contact')
+    else:
+        form = ContactForm()
+    return render(request, 'app/contact.html', {'form': form})
 

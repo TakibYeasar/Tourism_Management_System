@@ -1,16 +1,11 @@
-{% load static %}
-{% extends 'base.html' %}
-{% block title %}
-    <title>TMS | Admin Manage Bookings</title>
-{% endblock %}
+{% extends 'adminuser/base.html' %}
 {% block content %}
 <div class="page-container">
     <div class="left-content">
         <div class="mother-grid-inner">
-            {% include 'header.html' %}
             <div class="clearfix"></div>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a><i class="fa fa-angle-right"></i>Manage Bookings</li>
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a><i class="fa fa-angle-right"></i>Manage Bookings</li>
             </ol>
             <div class="agile-grids">
                 {% if msg %}
@@ -72,26 +67,7 @@
                 </div>
             </div>
             <div class="inner-block"></div>
-            {% include 'footer.html' %}
         </div>
     </div>
-    {% include 'sidebarmenu.html' %}
-    <div class="clearfix"></div>
 </div>
-<script>
-var toggle = true;
-
-$(".sidebar-icon").click(function () {
-    if (toggle) {
-        $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-        $("#menu span").css({"position": "absolute"});
-    } else {
-        $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-        setTimeout(function () {
-            $("#menu span").css({"position": "relative"});
-        }, 400);
-    }
-    toggle = !toggle;
-});
-</script>
 {% endblock %}

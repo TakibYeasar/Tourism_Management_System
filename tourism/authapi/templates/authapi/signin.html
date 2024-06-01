@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %} {% endcomment %}
 {% load static %}
 
 {% block content %}
@@ -15,8 +15,7 @@
                                 <form method="post">
                                     {% csrf_token %}
                                     <h3>Signin with your account</h3>
-                                    {{ form.email }}
-                                    {{ form.password }}
+                                    {{ form.as_p }}
                                     <input type="submit" value="SIGNIN">
                                 </form>
                             </div>

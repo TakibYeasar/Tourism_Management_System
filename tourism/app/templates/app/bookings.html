@@ -12,11 +12,32 @@
                 </div>
                 <div class="col-md-6">
                     <h1 class="text-white mb-4">Book A Tour</h1>
-                    <form method="post" action="" enctype="multipart/form-data">
+                    <form method="POST" action="">
+                    {% comment %} <form method="POST" action="{% url 'book_package' pkg_id=pkg_id %}"> {% endcomment %}
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <div class="col-12">
-                            <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
+                        {{ form.non_field_errors }}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    {{ form.from_date }}
+                                    <label for="{{ form.from_date.id_for_label }}">From Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    {{ form.to_date }}
+                                    <label for="{{ form.to_date.id_for_label }}">To Date</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    {{ form.comment }}
+                                    <label for="{{ form.comment.id_for_label }}">Special Request</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
+                            </div>
                         </div>
                     </form>
                 </div>

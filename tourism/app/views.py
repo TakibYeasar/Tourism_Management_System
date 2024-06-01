@@ -50,18 +50,24 @@ def ProfileView(request):
         user.mobile_number = request.POST.get('mobileno')
         user.save()
         msg = "Profile Updated Successfully"
-        return render(request, 'profile.html', {'user': user, 'msg': msg})
-    return render(request, 'profile.html', {'user': user})
+        return render(request, 'app/profile.html', {'user': user, 'msg': msg})
+    return render(request, 'app/profile.html', {'user': user})
+
+
+# def AllPackagesView(request):
+#     packages = TourPackage.objects.all()
+#     return render(request, 'app/package_list.html', {'packages': packages})
 
 
 def AllPackagesView(request):
-    packages = TourPackage.objects.all()
-    return render(request, 'app/packages.html', {'packages': packages})
+  packages = TourPackage.objects.all()
+  print(f"Number of packages retrieved: {len(packages)}")
+  return render(request, 'app/package_list.html', {'packages': packages})
 
 
 def PackageDetailsView(request, pkg_id):
     package = TourPackage.objects.get(pk=pkg_id)
-    return render(request, 'package_details.html', {'package': package})
+    return render(request, 'app/package_details.html', {'package': package})
 
 
 def AllGuidesView(request):
@@ -81,7 +87,8 @@ def BookPackageView(request, pkg_id):
             return redirect('thank_you')  # or another success page
     else:
         form = BookingForm()
-    return render(request, 'adminuser/package-details.html', {'package': package, 'form': form})
+    return render(request, 'adminuser/package-details.html', {'package': package, 'form': form, 'pkg_id': pkg_id})
+
 
 
 

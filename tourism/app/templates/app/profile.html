@@ -1,5 +1,5 @@
-{% load static %}
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
     <title>My Profile</title>
 {% endblock %}
@@ -12,12 +12,10 @@
             {% if msg %}
             <div class="succWrap">{{ msg }}</div>
             {% endif %}
-            <p><b>Name:</b> <input type="text" name="name" value="{{ user.full_name }}" required></p>
-            <p><b>Mobile Number:</b> <input type="text" name="mobileno" value="{{ user.mobile_number }}" maxlength="10" required></p>
+            <p><b>Username:</b> {{ user.username }}</p>
+            <p><b>First Name:</b> {{ user.first_name }}</p>
+            <p><b>Last Name:</b> {{ user.last_name }}</p>
             <p><b>Email:</b> {{ user.email }}</p>
-            <p><b>Last Updation Date:</b> {{ user.last_updated }}</p>
-            <p><b>Registration Date:</b> {{ user.registration_date }}</p>
-            <button type="submit" name="submit6">Update</button>
         </form>
     </div>
 {% endblock %}

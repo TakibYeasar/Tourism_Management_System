@@ -14,16 +14,16 @@
             <a href="#team" class="nav-item nav-link">Travel Guides</a>
             <a href="#contact" class="nav-item nav-link">Contact</a>
         </div>
-        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+        {% if user.is_authenticated %}
             {% if user.is_admin %}
                 <a href="admin_dashboard" class="nav-item nav-link">Admin Dashboard</a>
             {% else %}
-                {% comment %} <a href="{% url 'user_profile' %}" class="nav-item nav-link">Profile</a> {% endcomment %}
+                <a href="{% url 'user_profile' %}" class="nav-item nav-link">Profile</a>
             {% endif %}
-            {% comment %} <a href="{% url 'logout' %}" class="btn btn-primary rounded-pill py-2 px-4">Logout</a> {% endcomment %}
-        {% comment %} {% else %} {% endcomment %}
+            <a href="{% url 'logout' %}" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
+        {% else %}
             <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
             <a href="{% url 'register' %}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
-        {% comment %} {% endif %} {% endcomment %}
+        {% endif %}
     </div>
 </nav>

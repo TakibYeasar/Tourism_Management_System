@@ -35,7 +35,7 @@ def user_login(request):
                 if user.is_admin:
                     return redirect('admin_dashboard')
                 else:
-                    return redirect('home')
+                    return redirect('user_profile')
             else:
                 messages.error(request, 'Invalid email or password')
         else:
@@ -50,10 +50,6 @@ def logout_user(request):
         del request.session['user_id']
         messages.success(request, 'You have been logged out successfully.')
     return redirect('login')
-
-
-def home(request):
-    return render(request, 'app/home.html')
 
 
 def user_profile(request):

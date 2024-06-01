@@ -10,9 +10,10 @@ class UserRegistrationForm(forms.ModelForm):
         model = CustomUser
         fields = ['username', 'first_name', 'last_name', 'email', 'password']
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'Full Name'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'email': forms.EmailInput(attrs={'placeholder': 'Email id', 'id': 'email'}),
-            'first_name': forms.TextInput(attrs={'placeholder': 'Mobile number', 'maxlength': '10'}),
         }
     
     def clean(self):

@@ -8,11 +8,11 @@
         <p><strong>Duration:</strong> {{ package.duration }}</p>
         <p><strong>Max Persons:</strong> {{ package.max_persons }}</p>
         <p><strong>Price:</strong> USD {{ package.price }}</p>
-        <p><strong>Rating:</strong>
+        {% comment %} <p><strong>Rating:</strong>
             {% for i in 0|range:5 %}
                 <small class="fa fa-star text-primary{% if package.rating < i+1 %} text-muted{% endif %}"></small>
             {% endfor %}
-        </p>
+        </p> {% endcomment %}
         <p><strong>Description:</strong> {{ package.description }}</p>
 
         <h1 class="text-white mb-4">Book A Tour</h1>

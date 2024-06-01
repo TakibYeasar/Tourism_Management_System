@@ -38,32 +38,32 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-12">
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.non_field_errors }}
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="form-floating">
-                                {{ form.name.label_tag }}
                                 {{ form.name }}
+                                <label for="{{ form.name.id_for_label }}">Your Name</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                {{ form.email.label_tag }}
                                 {{ form.email }}
+                                <label for="{{ form.email.id_for_label }}">Your Email</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                {{ form.subject.label_tag }}
                                 {{ form.subject }}
+                                <label for="{{ form.subject.id_for_label }}">Subject</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                {{ form.message.label_tag }}
                                 {{ form.message }}
+                                <label for="{{ form.message.id_for_label }}">Leave a message here</label>
                             </div>
                         </div>
                         <div class="col-12">

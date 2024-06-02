@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 @login_required
 def DashboardView(request):
-    user_count = User.objects.count()
+    user_count = CustomUser.objects.count()
     package_count = TourPackage.objects.count()
     guide_count = Guide.objects.count()
     booking_count = Booking.objects.count()
@@ -35,7 +35,7 @@ def DashboardView(request):
 @login_required
 def ProfileView(request, admin_id):
     if 'alogin' not in request.session:
-        return redirect('home')
+        return redirect('dashboard')
 
     admin_id = request.session['alogin']
     admin = CustomUser.objects.get(user_name=admin_id)
@@ -92,7 +92,7 @@ def AddPackageView(request):
             )
             package.save()
             messages.success(request, 'Package Created Successfully')
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Something went wrong. Please try again')
     else:
@@ -151,7 +151,7 @@ def AddGuideView(request):
             )
             guide.save()
             messages.success(request, 'Guide Created Successfully')
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Something went wrong. Please try again')
     else:
@@ -175,7 +175,7 @@ def ManageGuideView(request):
 @login_required
 def UpdateGuideView(request, gid):
     if 'alogin' not in request.session:
-        return redirect('home')
+        return redirect('dashboard')
 
     guide = Guide.objects.get(pk=gid)
 
@@ -196,14 +196,14 @@ def UpdateGuideView(request, gid):
 
 @login_required
 def ManageUserView(request):
-    users = User.objects.all()
+    users = CustomUser.objects.all()
     return render(request, 'adminuser/manage_users.html', {'users': users})
 
 
 @login_required
 def ManageBookingsView(request):
     if not request.user.is_staff:  # Ensure the user is an admin
-        return redirect('index')
+        return redirect('dashboard')
 
     if 'bkid' in request.GET:
         booking_id = int(request.GET['bkid'])

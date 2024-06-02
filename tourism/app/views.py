@@ -41,16 +41,10 @@ def ChangepassView(request):
 
 
 def ProfileView(request):
-    if 'login' not in request.session:
-        return redirect('index')
-    user_email = request.session['login']
-    user = User.objects.get(email=user_email)
-    if request.method == 'POST':
-        user.full_name = request.POST.get('name')
-        user.mobile_number = request.POST.get('mobileno')
-        user.save()
-        msg = "Profile Updated Successfully"
-        return render(request, 'app/profile.html', {'user': user, 'msg': msg})
+    if 'user_id' not in request.session:
+        return redirect('home')
+    user_id = request.session['user_id']
+    user = get_object_or_404(CustomUser, id=user_id)
     return render(request, 'app/profile.html', {'user': user})
 
 

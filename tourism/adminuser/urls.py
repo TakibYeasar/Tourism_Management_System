@@ -5,7 +5,7 @@ from django.urls import path
 from .import views
 
 urlpatterns = [
-    path('dashboard/', views.DashboardView, name='home'),
+    path('dashboard/', views.DashboardView, name='admin_dashboard'),
     
     # profile Path
     path('profile', views.ProfileView, name='profile'),

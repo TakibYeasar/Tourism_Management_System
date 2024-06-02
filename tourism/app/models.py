@@ -32,7 +32,7 @@ class Booking(models.Model):
         ('u', 'User')
     )
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(CustomUser,
                              on_delete=models.CASCADE)
     package = models.ForeignKey(TourPackage, on_delete=models.CASCADE)
     booking_date = models.DateTimeField(auto_now_add=True)

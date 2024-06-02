@@ -1,4 +1,7 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib import messages
 from .forms import *
 from .models import CustomUser
@@ -35,7 +38,7 @@ def user_login(request):
                 if user.is_admin:
                     return redirect('admin_dashboard')
                 else:
-                    return redirect('user_profile')
+                    return redirect(reverse('user_profile'))
             else:
                 messages.error(request, 'Invalid email or password')
         else:
@@ -46,14 +49,11 @@ def user_login(request):
 
 
 def logout_user(request):
-    if 'user_id' in request.session:
-        del request.session['user_id']
+    if request.user.is_authenticated:
+        logout(request)
         messages.success(request, 'You have been logged out successfully.')
+    else:
+        messages.error(request, 'You are not logged in.')
     return redirect('login')
 
 
-def user_profile(request):
-    return render(request, 'app/profile.html')
-
-def admin_dashboard(request):
-    return render(request, 'adminuser/dashboard.html')

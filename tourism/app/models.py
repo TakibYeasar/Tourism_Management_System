@@ -62,6 +62,8 @@ class Guide(models.Model):
 
 
 class Contact(models.Model):
+    user = models.ForeignKey(CustomUser,
+                             on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     subject = models.CharField(max_length=200)

@@ -84,8 +84,6 @@ def BookPackageView(request, pkg_id):
     return render(request, 'adminuser/package-details.html', {'package': package, 'form': form, 'pkg_id': pkg_id})
 
 
-
-
 def TourHistoryView(request):
     if not request.session.get('login'):
         return redirect('home')
@@ -109,8 +107,14 @@ def TourHistoryView(request):
             messages.error(request, "Booking does not exist")
 
     user_email = request.session.get('login')
-    bookings = Booking.objects.filter(user_email=user_email)
+    try:
+        user = CustomUser.objects.get(email=user_email)
+        bookings = Booking.objects.filter(user=user)
+    except CustomUser.DoesNotExist:
+        bookings = []
+
     return render(request, 'app/tour_history.html', {'bookings': bookings})
+
 
 
 def ContactView(request):

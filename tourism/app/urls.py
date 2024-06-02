@@ -9,6 +9,6 @@ urlpatterns = [
     path('package/<int:pkg_id>/', views.PackageDetailsView, name='package_details'),
     path('guides/', views.AllGuidesView, name='guide_list'),
     path('package/<int:pkg_id>/book/', views.BookPackageView, name='book_package'),
-    path('tour-history/', views.TourHistoryView, name='tour_history'),
+    path('tour_history/', views.TourHistoryView, name='tour_history'),
     path('contact/', views.ContactView, name='contact'),
 ]
